@@ -1,83 +1,52 @@
-from collections import deque
+import datetime
 
-graph = {
-    "A": [("B", 1), ("C", 5)],
-    "B": [("D", 1)],
-    "C": [("D", 1)],
-    "D": [("G", 1)],
-    "G": []
-}
+print("=" * 50)
+print("        WELCOME TO AI CHATBOT")
+print("=" * 50)
 
+print("\nType 'exit' to close the chatbot.\n")
 
-def bfs(start, goal):
-    queue = deque([(start, [start], 0)])
-    visited = set()
+while True:
 
-    while queue:
-        node, path, cost = queue.popleft()
+    user = input("You : ")
+    user = user.lower()
 
-        if node in visited:
-            continue
+    if user == "hello" or user == "hi":
+        print("Bot : Hello! Welcome.")
 
-        visited.add(node)
+    elif user == "how are you":
+        print("Bot : I am fine. Thank you!")
 
-        if node == goal:
-            return path, cost, visited
+    elif user == "what is your name":
+        print("Bot : My name is AI ChatBot.")
 
-        for next_node, edge_cost in graph[node]:
-            queue.append(
-                (next_node, path + [next_node], cost + edge_cost)
-            )
+    elif user == "who created you":
+        print("Bot : I was created using Python.")
 
-    return [], 0, visited
+    elif user == "what is ai":
+        print("Bot : Artificial Intelligence enables computers to think and make decisions.")
 
+    elif user == "python":
+        print("Bot : Python is a popular programming language for AI.")
 
-def dfs(start, goal):
-    stack = [(start, [start], 0)]
-    visited = set()
+    elif user == "date":
+        today = datetime.date.today()
+        print("Bot :", today)
 
-    while stack:
-        node, path, cost = stack.pop()
+    elif user == "time":
+        now = datetime.datetime.now()
+        print("Bot :", now.strftime("%H:%M:%S"))
 
-        if node in visited:
-            continue
+    elif user == "thank you":
+        print("Bot : You're welcome!")
 
-        visited.add(node)
+    elif user == "bye":
+        print("Bot : Goodbye! Have a Nice Day.")
+        break
 
-        if node == goal:
-            return path, cost, visited
+    elif user == "exit":
+        print("Bot : Chat Closed Successfully.")
+        break
 
-        for next_node, edge_cost in reversed(graph[node]):
-            stack.append(
-                (next_node, path + [next_node], cost + edge_cost)
-            )
-
-    return [], 0, visited
-
-
-start = "A"
-goal = "G"
-
-bfs_path, bfs_cost, bfs_visited = bfs(start, goal)
-dfs_path, dfs_cost, dfs_visited = dfs(start, goal)
-
-print("BFS")
-print("Path:", " -> ".join(bfs_path))
-print("Path Cost:", bfs_cost)
-print("Rooms Checked:", list(bfs_visited))
-print("Number of Rooms:", len(bfs_visited))
-
-print("\nDFS")
-print("Path:", " -> ".join(dfs_path))
-print("Path Cost:", dfs_cost)
-print("Rooms Checked:", list(dfs_visited))
-print("Number of Rooms:", len(dfs_visited))
-
-print("\nComparison")
-
-if bfs_cost < dfs_cost:
-    print("BFS has lower path cost")
-elif dfs_cost < bfs_cost:
-    print("DFS has lower path cost")
-else:
-    print("Both have the same path cost")
+    else:
+        print("Bot : Sorry! I don't understand your question.")
