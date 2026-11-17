@@ -1,4 +1,4 @@
-//hii
+
 spam_words = [
     "lottery",
     "winner",
